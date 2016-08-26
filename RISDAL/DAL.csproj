@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{25CB754C-2F85-4247-9BF6-F80624F4E3C7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DAL</RootNamespace>
+    <AssemblyName>RISDAL</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=5.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.5.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="RISDAL.cs" />
+    <Compile Include="fnSplitString_Result.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hltsp_ConfigCC_ControlloMedico_Result.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_certificato.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_certificato_backup.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_conclusioni.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_conclusioni_backup.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_daticlinici.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_daticlinici_backup.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_documenti.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_documenti_backup.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_gestionefirme.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_gestionefirme_backup.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_LabelTabelle.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_ListaValoriLabel.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_note.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_note_backup.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_permessi_x_episodio.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_permessi_x_episodio_backup.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_plantari.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_richieste.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_richiesteesterne.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_richiesteesterne_backup.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_richieste_backup.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_ricradiologica.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_ricradiologica_backup.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_schedavalutazione.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_schedavalutazione_backup.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_TableListaCampi.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_terapiafarmacologica.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_terapiafarmacologica_backup.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_vavcmint.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_vavcort.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_vavcort_backup.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_vavcport.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_vavc_old.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_vavimint.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_vaviort.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_vaviort_backup.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_vaviport.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_vavi_old.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_vcardmf.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_vcol.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_vfisiov.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_vmarvis.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_vmarvisp.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_vrdv001.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="hlt_vrdv001_backup.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Media.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Menu.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MenuProfili.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelRIS.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelRIS.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelRIS.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelRIS.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelRIS.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Profili.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="spControlloOperatore_Result.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spControlloPermessoReadOnly_Result.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spControlloPermesso_Result.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spGetDatiAnagraficiByIdEpisodio_old_Result.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spGetDatiMedico_Result.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spGetDocumentiByIdEpisodio_Result.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spGetServiziByAzienda_Result.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spGetServiziByIdEpisodio_Result.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spMenu_Result.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spPazientiPresenti_Result.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="ModelRIS.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelRIS.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ModelRIS.edmx.diagram">
+      <DependentUpon>ModelRIS.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ModelRIS.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelRIS.edmx</DependentUpon>
+      <LastGenOutput>ModelRIS.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ModelRIS.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelRIS.edmx</DependentUpon>
+      <LastGenOutput>ModelRIS.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DAO\DAO.csproj">
+      <Project>{ae2c09a2-e27a-4eb9-9afa-efc96ae9a999}</Project>
+      <Name>DAO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IRISDAL\IDAL.csproj">
+      <Project>{b954af4b-a52a-4159-8be8-899f65e2dec1}</Project>
+      <Name>IDAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
