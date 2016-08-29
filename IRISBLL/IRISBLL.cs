@@ -12,7 +12,8 @@ namespace IBLL
         DTO.EpisodioDTO GetEpisodioById(string id);
         List<IBLL.DTO.RichiestaRISDTO> GetRichiesteRISByEpis(string episid);
         DTO.RichiestaRISDTO GetRichiestaRISById(string richidid);
-        List<DTO.EsameDTO> GetEsamiDataByRich(string richidid);
-        List<DTO.EsameDTO> GetEsamiDataByEpis(string episidid);
+        List<DTO.EsameDTO> GetEsamiByRich(string richidid);
+        List<DTO.EsameDTO> GetEsamiByEpis(string episidid);
+        DTO.EsameDTO GetEsameById(string esamidid);
     }
 }

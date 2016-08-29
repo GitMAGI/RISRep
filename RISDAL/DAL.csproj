@@ -56,6 +56,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="hlt_esameradio.cs">
+      <DependentUpon>ModelRIS.tt</DependentUpon>
+    </Compile>
     <Compile Include="RISDAL.cs" />
     <Compile Include="fnSplitString_Result.cs">
       <DependentUpon>ModelRIS.tt</DependentUpon>
@@ -264,6 +267,7 @@
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config" />
     <None Include="ModelRIS.edmx.diagram">
       <DependentUpon>ModelRIS.edmx</DependentUpon>
     </None>

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="RISModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="RISModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <!--Errori trovati durante la generazione:
 avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'ccDemo_devRIS.dbo.hlt_certificato'. La chiave è stata dedotta e la definizione è stata creata come tabella/visualizzazione di sola lettura.-->
         <EntityType Name="hlt_certificato">
@@ -172,6 +172,20 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'cc
           <Property Name="documenti" Type="nvarchar" MaxLength="50" />
           <Property Name="idmedia" Type="float" />
           <Property Name="pdfcreato" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="hlt_esameradio">
+          <Key>
+            <PropertyRef Name="esameidid" />
+          </Key>
+          <Property Name="esameidid" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="esamedesc" Type="nvarchar(max)" />
+          <Property Name="esametipo" Type="int" Nullable="false" />
+          <Property Name="esamestato" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="esamedataprenotazione" Type="datetime" />
+          <Property Name="esamedataesecuzione" Type="datetime" />
+          <Property Name="esamereferto" Type="nvarchar(max)" />
+          <Property Name="esame_ext_key" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="esamerichid" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <!--Errori trovati durante la generazione:
 avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'ccDemo_devRIS.dbo.hlt_gestionefirme'. La chiave è stata dedotta e la definizione è stata creata come tabella/visualizzazione di sola lettura.-->
@@ -1636,6 +1650,7 @@ avviso 6002: Nessuna chiave primaria definita per la tabella/visualizzazione 'cc
           <Parameter Name="Azienda" Type="varchar" Mode="In" />
         </Function>
         <EntityContainer Name="RISModelStoreContainer">
+          <EntitySet Name="hlt_esameradio" EntityType="Self.hlt_esameradio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Media" EntityType="Self.Media" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Profili" EntityType="Self.Profili" Schema="dbo" store:Type="Tables" />
@@ -2748,8 +2763,7 @@ FROM [dbo].[hlt_vrdv001_backup] AS [hlt_vrdv001_backup]</DefiningQuery>
 FROM [dbo].[MenuProfili] AS [MenuProfili]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="RISModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -4198,13 +4212,13 @@ FROM [dbo].[MenuProfili] AS [MenuProfili]</DefiningQuery>
             <Parameter Name="delimiter" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="cc_Reports_CartellaClinicaIUSM">
-            <Parameter Name="IdEpisodio" Mode="In" Type="Int32" />
+          <Parameter Name="IdEpisodio" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="cc_Reports_CartellaClinicaIUSM_sportPraticato">
-            <Parameter Name="Seriale" Mode="In" Type="Int32" />
+          <Parameter Name="Seriale" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="cc_Shortcut">
-            <Parameter Name="IdMedico" Mode="In" Type="Int32" />
+          <Parameter Name="IdMedico" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="hltsp_ConfigCC_ControlloMedico" ReturnType="Collection(RISModel.hltsp_ConfigCC_ControlloMedico_Result)">
             <Parameter Name="Nominativo" Mode="In" Type="String" />
@@ -4226,7 +4240,7 @@ FROM [dbo].[MenuProfili] AS [MenuProfili]</DefiningQuery>
             <Parameter Name="pIdCategoria" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spCcOrtopediaSantucciVisiteBySerialeCC">
-            <Parameter Name="Seriale" Mode="In" Type="Int32" />
+          <Parameter Name="Seriale" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spControlloOperatore" ReturnType="Collection(RISModel.spControlloOperatore_Result)">
             <Parameter Name="PrefixTable" Mode="In" Type="String" />
@@ -4249,29 +4263,29 @@ FROM [dbo].[MenuProfili] AS [MenuProfili]</DefiningQuery>
             <Parameter Name="col_name" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="spElencoCartelleGetByIdEpisodio">
-            <Parameter Name="IdEpisodio" Mode="In" Type="Int32" />
+          <Parameter Name="IdEpisodio" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spGetDatiAnagraficiByEpisodioInTable">
-            <Parameter Name="IdEpisodio" Mode="In" Type="Int32" />
+          <Parameter Name="IdEpisodio" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spGetDatiAnagraficiByIdEpisodio">
             <Parameter Name="IdEpisodio" Mode="In" Type="Int32" />
             <Parameter Name="IdServizioEpisodio" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spGetDatiAnagraficiByIdEpisodio_old" ReturnType="Collection(RISModel.spGetDatiAnagraficiByIdEpisodio_old_Result)">
-            <Parameter Name="IdEpisodio" Mode="In" Type="Int32" />
+          <Parameter Name="IdEpisodio" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spGetDatiMedico" ReturnType="Collection(RISModel.spGetDatiMedico_Result)">
-            <Parameter Name="userName" Mode="In" Type="String" />
+          <Parameter Name="userName" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="spGetDocumentiByIdEpisodio" ReturnType="Collection(RISModel.spGetDocumentiByIdEpisodio_Result)">
-            <Parameter Name="IdEpisodio" Mode="In" Type="Int32" />
+          <Parameter Name="IdEpisodio" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spGetEpisodiByPermessiByUser" ReturnType="Collection(String)">
-            <Parameter Name="Username" Mode="In" Type="String" />
+          <Parameter Name="Username" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="spGetIdServizioEpisodioByIdEpisodio">
-            <Parameter Name="IdEpisodio" Mode="In" Type="Int32" />
+          <Parameter Name="IdEpisodio" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spGetServiziByAzienda" ReturnType="Collection(RISModel.spGetServiziByAzienda_Result)">
             <Parameter Name="PrefixTable" Mode="In" Type="String" />
@@ -4315,7 +4329,7 @@ FROM [dbo].[MenuProfili] AS [MenuProfili]</DefiningQuery>
             <Parameter Name="IdOperatore" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spMenu" ReturnType="Collection(RISModel.spMenu_Result)">
-            <Parameter Name="IdProfilo" Mode="In" Type="Int32" />
+          <Parameter Name="IdProfilo" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spPazientiPresenti" ReturnType="Collection(RISModel.spPazientiPresenti_Result)">
             <Parameter Name="Azienda" Mode="In" Type="String" />
@@ -4335,8 +4349,9 @@ FROM [dbo].[MenuProfili] AS [MenuProfili]</DefiningQuery>
             <Parameter Name="Username" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="spTotPazientiPresenti" ReturnType="Collection(Int32)">
-            <Parameter Name="Azienda" Mode="In" Type="String" />
+          <Parameter Name="Azienda" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="hlt_esameradio" EntityType="RISModel.hlt_esameradio" />
         </EntityContainer>
         <ComplexType Name="hltsp_ConfigCC_ControlloMedico_Result">
           <Property Type="String" Name="Nome" Nullable="false" MaxLength="10" />
@@ -4418,6 +4433,20 @@ FROM [dbo].[MenuProfili] AS [MenuProfili]</DefiningQuery>
           <Property Type="String" Name="stato" Nullable="false" MaxLength="1" />
           <Property Type="Int64" Name="rnum" Nullable="true" />
         </ComplexType>
+        <EntityType Name="hlt_esameradio">
+          <Key>
+            <PropertyRef Name="esameidid" />
+          </Key>
+          <Property Name="esameidid" Type="Int64" Nullable="false" />
+          <Property Name="esamedesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="esametipo" Type="Int32" Nullable="false" />
+          <Property Name="esamestato" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="esamedataprenotazione" Type="DateTime" Precision="3" />
+          <Property Name="esamedataesecuzione" Type="DateTime" Precision="3" />
+          <Property Name="esamereferto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="esame_ext_key" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="esamerichid" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5821,6 +5850,21 @@ FROM [dbo].[MenuProfili] AS [MenuProfili]</DefiningQuery>
           <FunctionImportMapping FunctionImportName="spPazientiPresentiSearch" FunctionName="RISModel.Store.spPazientiPresentiSearch" />
           <FunctionImportMapping FunctionImportName="spPrintElencoCartelle" FunctionName="RISModel.Store.spPrintElencoCartelle" />
           <FunctionImportMapping FunctionImportName="spTotPazientiPresenti" FunctionName="RISModel.Store.spTotPazientiPresenti" />
+          <EntitySetMapping Name="hlt_esameradio">
+            <EntityTypeMapping TypeName="RISModel.hlt_esameradio">
+              <MappingFragment StoreEntitySet="hlt_esameradio">
+                <ScalarProperty Name="esamerichid" ColumnName="esamerichid" />
+                <ScalarProperty Name="esame_ext_key" ColumnName="esame_ext_key" />
+                <ScalarProperty Name="esamereferto" ColumnName="esamereferto" />
+                <ScalarProperty Name="esamedataesecuzione" ColumnName="esamedataesecuzione" />
+                <ScalarProperty Name="esamedataprenotazione" ColumnName="esamedataprenotazione" />
+                <ScalarProperty Name="esamestato" ColumnName="esamestato" />
+                <ScalarProperty Name="esametipo" ColumnName="esametipo" />
+                <ScalarProperty Name="esamedesc" ColumnName="esamedesc" />
+                <ScalarProperty Name="esameidid" ColumnName="esameidid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

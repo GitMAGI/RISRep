@@ -38,12 +38,17 @@ namespace RISDataRetriever
 
         public object GetEsamsDataByRich(string richidid)
         {
-            return (List<EsameDTO>)this.bll.GetEsamiDataByRich(richidid);
+            return (List<EsameDTO>)this.bll.GetEsamiByRich(richidid);
         }
 
         public object GetEsamsDataByEpis(string episidid)
         {
-            return (List<EsameDTO>)this.bll.GetEsamiDataByEpis(episidid);
+            return (List<EsameDTO>)this.bll.GetEsamiByEpis(episidid);
+        }
+
+        public object GetEsamDataById(string esamidid)
+        {
+            return (EsameDTO)this.bll.GetEsameById(esamidid);
         }
     }
 }

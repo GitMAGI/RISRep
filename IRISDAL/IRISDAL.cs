@@ -14,5 +14,6 @@ namespace IDAL
         List<IDAL.DTO.RichiestaRISDTO> GetRichiesteByEpis(string episidid);
         List<IDAL.DTO.EsameDTO> GetEsamiByRich(string richidid);
         List<IDAL.DTO.EsameDTO> GetEsamiByEpis(string episidid);
+        IDAL.DTO.EsameDTO GetEsameById(string esamidid);
     }
 }

@@ -54,6 +54,7 @@
         <EntityTypeShape EntityType="RISModel.hlt_vrdv001" Width="1.5" PointX="22.75" PointY="22.75" IsExpanded="true" />
         <EntityTypeShape EntityType="RISModel.hlt_vrdv001_backup" Width="1.5" PointX="24.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="RISModel.MenuProfili" Width="1.5" PointX="24.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RISModel.hlt_esameradio" Width="1.5" PointX="25.375" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

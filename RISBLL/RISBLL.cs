@@ -43,18 +43,23 @@ namespace BLL
             return this.RichMapper(dalRes);
         }
 
-        public List<IBLL.DTO.EsameDTO> GetEsamiDataByRich(string richidid)
+        public List<IBLL.DTO.EsameDTO> GetEsamiByRich(string richidid)
         {
             List<IDAL.DTO.EsameDTO> dalRes = this.dal.GetEsamiByRich(richidid);
             return this.EsamMapper(dalRes);
         }
 
-        public List<IBLL.DTO.EsameDTO> GetEsamiDataByEpis(string episidid)
+        public List<IBLL.DTO.EsameDTO> GetEsamiByEpis(string episidid)
         {
             List<IDAL.DTO.EsameDTO> dalRes = this.dal.GetEsamiByEpis(episidid);
             return this.EsamMapper(dalRes);
         }
 
+        public IBLL.DTO.EsameDTO GetEsameById(string esamidid)
+        {
+            IDAL.DTO.EsameDTO dalRes = this.dal.GetEsameById(esamidid);
+            return this.EsamMapper(dalRes);
+        }
         
         // Mappers
         

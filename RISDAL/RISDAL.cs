@@ -128,6 +128,8 @@ namespace DAL
 
             return rich;
         }
+        
+        /*
         public List<IDAL.DTO.EsameDTO> GetEsamiByRich(string richidid)
         {
             List<IDAL.DTO.EsameDTO> esam = null;
@@ -198,6 +200,107 @@ namespace DAL
 
             return esam;
         }
+        */
+        public List<IDAL.DTO.EsameDTO> GetEsamiByRich(string richidid)
+        {
+            List<IDAL.DTO.EsameDTO> esam = null;
+            try
+            {
+                List<hlt_esameradio> esams_ = hltCC.hlt_esameradio.Where(t => t.esamerichid == richidid).ToList();
+                log.Info(string.Format("Query Executed! Retrieved {0} record!", esams_.Count));
+                esam = this.EsamMapper(esams_);
+                log.Info(string.Format("{0} Records mapped to EsameDTO", esam.Count));
+            }
+            catch (Exception ex)
+            {
+                log.Warn(string.Format("EntityFramework returned an Exception! \n{0}", ex.Message));
+                log.Info(string.Format("Query Executed! Retrieved 0 record!"));
+            }
+            return esam;
+        }
+        public List<IDAL.DTO.EsameDTO> GetEsamiByEpis(string episidid)
+        {
+            List<IDAL.DTO.EsameDTO> esams = null;
+            try
+            {         
+                var L2EQuery = from e in hltCC.hlt_esameradio join r in hltCC.hlt_ricradiologica on e.esamerichid equals r.objectid where r.idepisodio.Equals(episidid) select e;                                   
+               
+                List<hlt_esameradio> esams_ = L2EQuery.ToList();
+                log.Info(string.Format("Query Executed! Retrieved {0} record!", esams_.Count));
+                esams = this.EsamMapper(esams_);
+                log.Info(string.Format("{0} Records mapped to EsameDTO", esams.Count));
+
+            }
+            catch (Exception ex)
+            {
+                log.Warn(string.Format("EntityFramework returned an Exception! \n{0}", ex.Message));
+                log.Info(string.Format("Query Executed! Retrieved 0 record!"));
+            }
+            return esams;
+        }
+        public IDAL.DTO.EsameDTO GetEsameById(string esamidid)
+        {
+            IDAL.DTO.EsameDTO esam = null;
+            try
+            {
+                long esamidid_ = long.Parse(esamidid);
+                hlt_esameradio esam_ = hltCC.hlt_esameradio.Single(t => t.esameidid == esamidid_);
+                log.Info(string.Format("Query Executed! Retrieved 1 record!"));
+                esam = this.EsamMapper(esam_);
+                log.Info("Record mapped to EsameDTO");
+            }
+            catch (Exception ex)
+            {
+                log.Warn(string.Format("EntityFramework returned an Exception! \n{0}", ex.Message));
+                log.Info(string.Format("Query Executed! Retrieved 0 record!"));
+            }
+            return esam;     
+        }
+
+        public int SetEsameByPk(Dictionary<string, object> data, string esamidid)
+        {
+            int result = -1;
+            long esamidid_ = long.Parse(esamidid);
+            hlt_esameradio esam = hltCC.hlt_esameradio.First(t => t.esameidid == esamidid_);
+
+            foreach (KeyValuePair<string, object> d_ in data)
+            {
+                string origPName = d_.Key;
+                object val = d_.Value;
+                string destPName = origPName;
+
+                System.Reflection.PropertyInfo prop = esam.GetType().GetProperty(destPName);
+
+                if(prop != null) 
+                {
+                    prop.SetValue(esam, Convert.ChangeType(val, prop.PropertyType), null);
+                }
+            }
+            
+            result = hltCC.SaveChanges();
+            return result;
+        }
+        public int SetEsameByPk(IDAL.DTO.EsameDTO data, string esamidid)
+        {
+            int result = -1;
+            long esamidid_ = long.Parse(esamidid);
+            hlt_esameradio esam = hltCC.hlt_esameradio.First(t => t.esameidid == esamidid_);
+
+            hlt_esameradio data_ = this.EsamUnMapper(data);
+
+            foreach (System.Reflection.PropertyInfo prop in data_.GetType().GetProperties())
+            {
+                if (esam.GetType().GetProperty(prop.Name) != null)
+                {
+                    object val = prop.GetValue(data_, null);
+                    esam.GetType().GetProperty(prop.Name).SetValue(esam, Convert.ChangeType(val, Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType), null);
+                }
+            }
+
+            result = hltCC.SaveChanges();
+            return result;
+        }
+
 
         public IDAL.DTO.PazienteDTO PaziMapper(DataRow row)
         {
@@ -383,9 +486,70 @@ namespace DAL
 
             return epis;
         }
+        public IDAL.DTO.EsameDTO EsamMapper(hlt_esameradio data)
+        {
+            IDAL.DTO.EsameDTO esam = null;
 
+            try
+            {
+                Mapper.Initialize(cfg => cfg.CreateMap<hlt_esameradio, IDAL.DTO.EsameDTO>());
+                Mapper.AssertConfigurationIsValid();
+                esam = Mapper.Map<IDAL.DTO.EsameDTO>(data);
+            }
+            catch (AutoMapperConfigurationException ex)
+            {
+                log.Error(string.Format("AutoMapper Configuration Error!\n{0}", ex.Message));
+            }
+            catch (AutoMapperMappingException ex)
+            {
+                log.Error(string.Format("AutoMapper Mapping Error!\n{0}", ex.Message));
+            }
 
+            return esam;
+        }       
+        public List<IDAL.DTO.EsameDTO> EsamMapper(List<hlt_esameradio> data)
+        {
+            List<IDAL.DTO.EsameDTO> esams = null;
 
+            if (data != null && data.Count > 0)
+            {
+                esams = new List<IDAL.DTO.EsameDTO>();
+
+                foreach(hlt_esameradio datum in data){
+                    IDAL.DTO.EsameDTO tmp = null;
+
+                    tmp = this.EsamMapper(datum);
+
+                    if(tmp!=null)
+                        esams.Add(tmp);
+                }
+            }
+
+            return esams;
+        }
+
+        public hlt_esameradio EsamUnMapper(IDAL.DTO.EsameDTO data)
+        {
+            hlt_esameradio esam = null;
+
+            try
+            {
+                Mapper.Initialize(cfg => cfg.CreateMap<IDAL.DTO.EsameDTO, hlt_esameradio>());
+                Mapper.AssertConfigurationIsValid();
+                esam = Mapper.Map<hlt_esameradio>(data);
+            }
+            catch (AutoMapperConfigurationException ex)
+            {
+                log.Error(string.Format("AutoMapper Configuration Error!\n{0}", ex.Message));
+            }
+            catch (AutoMapperMappingException ex)
+            {
+                log.Error(string.Format("AutoMapper Mapping Error!\n{0}", ex.Message));
+            }
+
+            return esam;
+        }
+        
         /*
         void test()
         {

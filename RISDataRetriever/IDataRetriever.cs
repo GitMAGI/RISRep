@@ -14,5 +14,6 @@ namespace RISDataRetriever
         object GetRichsDataByEpis(string episidid);
         object GetEsamsDataByRich(string richidid);
         object GetEsamsDataByEpis(string episidid);
+        object GetEsamDataById(string esamidid);
     }
 }

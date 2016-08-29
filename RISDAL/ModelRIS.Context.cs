@@ -77,6 +77,7 @@ namespace DAL
         public DbSet<hlt_vrdv001> hlt_vrdv001 { get; set; }
         public DbSet<hlt_vrdv001_backup> hlt_vrdv001_backup { get; set; }
         public DbSet<MenuProfili> MenuProfili { get; set; }
+        public DbSet<hlt_esameradio> hlt_esameradio { get; set; }
     
         [EdmFunction("ccDemo_devRISEntities", "fnSplitString")]
         public virtual IQueryable<fnSplitString_Result> fnSplitString(string @string, string delimiter)
