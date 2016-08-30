@@ -13,5 +13,8 @@ namespace IDAL
 
         int AddEsame(Dictionary<string, object> data);
         int AddEsame(IDAL.DTO.EsameDTO data);
+
+        int DeleteEsame(string esamidid);
+        int DeleteEsame(IDAL.DTO.EsameDTO data);
     }
 }

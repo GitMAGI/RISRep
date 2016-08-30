@@ -17,7 +17,7 @@ namespace IBLL
         DTO.EsameDTO GetEsameById(string esamidid);
 
         int UpdateEsameById(IBLL.DTO.EsameDTO data, string esamidid);
-        int AddEsameById(IBLL.DTO.EsameDTO data);
+        int AddEsame(IBLL.DTO.EsameDTO data);
         int DeleteEsameById(string esamidid);
     }
 }

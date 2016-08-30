@@ -28,29 +28,44 @@ namespace RISDataRetriever
             List<IBLL.DTO.EsameDTO> esams = (List<IBLL.DTO.EsameDTO>)DR.GetEsamsDataByRich("20160804111023719");
 
             List<IBLL.DTO.EsameDTO> esams2 = (List<IBLL.DTO.EsameDTO>)DR.GetEsamsDataByEpis("490937");
-            */
-
-            string examId = "3";
-            /*
-             * 
-             * 
+            
+            string examId = "3";           
             
             Dictionary<string, object> exam = new Dictionary<string, object>();
             exam["esameidid"] = 3;
             exam["esamestato"] = "A";
             exam["esame_ext_key"] = "7988282";
             int res = dal.SetEsameByPk(exam, examId);
-
-             * 
-             * 
-             * 
-             * */
-
+            
             IDAL.DTO.EsameDTO toW = dal.GetEsameById("3");
             toW.esamestato = "A";
             toW.esame_ext_key = "2919021";
             int res = dao.SetEsameByPk(toW, "3");
+            */
 
+            string esame_ext_key = "32443543543543";
+            string esamedataesecuzione = "01/05/2016 13:00:00";
+            string esamedataprenotazione = "01/03/2016 12:00:00";
+            string esamedesc = "Pompeleria Rizzoli";
+            string esamereferto = null;
+            string esamestato = "A";
+            string esamerichid = "20160804111023719";
+            int esametipo = 14852;
+
+            IBLL.DTO.EsameDTO esam = new EsameDTO();
+
+            esam.esamerichid = esamerichid;
+            esam.esame_ext_key = esame_ext_key;
+            esam.esamedataesecuzione = esamedataesecuzione;
+            esam.esamedataprenotazione = esamedataprenotazione;
+            esam.esamedesc = esamedesc;
+            esam.esamereferto = esamereferto;
+            esam.esamestato = esamestato;
+            esam.esametipo = esametipo;
+
+            int result = bll.AddEsame(esam);
+
+            System.Console.WriteLine("Operazione Completata. Risultato operazione scrittura: {0}", result);
 
 
             System.Console.WriteLine("Premere un tasto per continuare ...");

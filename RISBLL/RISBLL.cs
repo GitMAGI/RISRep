@@ -73,7 +73,7 @@ namespace BLL
             return result;
         }
 
-        public int AddEsameById(IBLL.DTO.EsameDTO data)
+        public int AddEsame(IBLL.DTO.EsameDTO data)
         {
             int result = 0;
 
@@ -87,7 +87,7 @@ namespace BLL
         {
             int result = 0;
 
-
+            result = dao.DeleteEsame(esamidid);
 
             return result;
         }
