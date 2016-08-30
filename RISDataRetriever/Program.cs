@@ -15,7 +15,8 @@ namespace RISDataRetriever
         static void Main(string[] args)
         {            
             DAL.RISDAL dal = new DAL.RISDAL();
-            BLL.RISBLL bll = new BLL.RISBLL(dal);
+            DAL.RISDAO dao = new DAL.RISDAO();
+            BLL.RISBLL bll = new BLL.RISBLL(dal, dao);
             DataRetriever DR = new DataRetriever(bll);
 
             /*
@@ -46,9 +47,9 @@ namespace RISDataRetriever
              * */
 
             IDAL.DTO.EsameDTO toW = dal.GetEsameById("3");
-            toW.esamestato = "R";
-            toW.esame_ext_key = "0909029";
-            int res = dal.SetEsameByPk(toW, "3");
+            toW.esamestato = "A";
+            toW.esame_ext_key = "2919021";
+            int res = dao.SetEsameByPk(toW, "3");
 
 
 

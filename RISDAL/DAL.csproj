@@ -229,6 +229,7 @@
       <DependentUpon>ModelRIS.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RISDAO.cs" />
     <Compile Include="spControlloOperatore_Result.cs">
       <DependentUpon>ModelRIS.tt</DependentUpon>
     </Compile>
@@ -289,9 +290,9 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DAO\DAO.csproj">
+    <ProjectReference Include="..\DAO\DBO.csproj">
       <Project>{ae2c09a2-e27a-4eb9-9afa-efc96ae9a999}</Project>
-      <Name>DAO</Name>
+      <Name>DBO</Name>
     </ProjectReference>
     <ProjectReference Include="..\IRISDAL\IDAL.csproj">
       <Project>{b954af4b-a52a-4159-8be8-899f65e2dec1}</Project>

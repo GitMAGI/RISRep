@@ -257,50 +257,6 @@ namespace DAL
             return esam;     
         }
 
-        public int SetEsameByPk(Dictionary<string, object> data, string esamidid)
-        {
-            int result = -1;
-            long esamidid_ = long.Parse(esamidid);
-            hlt_esameradio esam = hltCC.hlt_esameradio.First(t => t.esameidid == esamidid_);
-
-            foreach (KeyValuePair<string, object> d_ in data)
-            {
-                string origPName = d_.Key;
-                object val = d_.Value;
-                string destPName = origPName;
-
-                System.Reflection.PropertyInfo prop = esam.GetType().GetProperty(destPName);
-
-                if(prop != null) 
-                {
-                    prop.SetValue(esam, Convert.ChangeType(val, prop.PropertyType), null);
-                }
-            }
-            
-            result = hltCC.SaveChanges();
-            return result;
-        }
-        public int SetEsameByPk(IDAL.DTO.EsameDTO data, string esamidid)
-        {
-            int result = -1;
-            long esamidid_ = long.Parse(esamidid);
-            hlt_esameradio esam = hltCC.hlt_esameradio.First(t => t.esameidid == esamidid_);
-
-            hlt_esameradio data_ = this.EsamUnMapper(data);
-
-            foreach (System.Reflection.PropertyInfo prop in data_.GetType().GetProperties())
-            {
-                if (esam.GetType().GetProperty(prop.Name) != null)
-                {
-                    object val = prop.GetValue(data_, null);
-                    esam.GetType().GetProperty(prop.Name).SetValue(esam, Convert.ChangeType(val, Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType), null);
-                }
-            }
-
-            result = hltCC.SaveChanges();
-            return result;
-        }
-
 
         public IDAL.DTO.PazienteDTO PaziMapper(DataRow row)
         {
@@ -528,36 +484,5 @@ namespace DAL
             return esams;
         }
 
-        public hlt_esameradio EsamUnMapper(IDAL.DTO.EsameDTO data)
-        {
-            hlt_esameradio esam = null;
-
-            try
-            {
-                Mapper.Initialize(cfg => cfg.CreateMap<IDAL.DTO.EsameDTO, hlt_esameradio>());
-                Mapper.AssertConfigurationIsValid();
-                esam = Mapper.Map<hlt_esameradio>(data);
-            }
-            catch (AutoMapperConfigurationException ex)
-            {
-                log.Error(string.Format("AutoMapper Configuration Error!\n{0}", ex.Message));
-            }
-            catch (AutoMapperMappingException ex)
-            {
-                log.Error(string.Format("AutoMapper Mapping Error!\n{0}", ex.Message));
-            }
-
-            return esam;
-        }
-        
-        /*
-        void test()
-        {
-            hlt_certificato pp = hltCC.hlt_certificato.First(t => t.objectid == "xxdx");
-
-            pp.prescrizione = "aaa";
-            hltCC.SaveChanges();
-        }
-        */
     }
 }

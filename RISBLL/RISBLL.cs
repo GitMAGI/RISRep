@@ -13,10 +13,12 @@ namespace BLL
             log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private IDAL.IRISDAL dal;
+        private IDAL.IRISDAO dao;
 
-        public RISBLL(IDAL.IRISDAL IDAL)
+        public RISBLL(IDAL.IRISDAL IDAL, IDAL.IRISDAO IDAO)
         {
             this.dal = IDAL;
+            this.dao = IDAO;
         }
 
         public IBLL.DTO.PazienteDTO GetPazienteById(string id)
@@ -59,6 +61,35 @@ namespace BLL
         {
             IDAL.DTO.EsameDTO dalRes = this.dal.GetEsameById(esamidid);
             return this.EsamMapper(dalRes);
+        }
+
+        public int UpdateEsameById(IBLL.DTO.EsameDTO data, string esamidid)
+        {
+            int result = 0;
+
+            IDAL.DTO.EsameDTO data_ = this.EsamUnMapper(data);
+            result = dao.SetEsameByPk(data_, esamidid);
+
+            return result;
+        }
+
+        public int AddEsameById(IBLL.DTO.EsameDTO data)
+        {
+            int result = 0;
+
+            IDAL.DTO.EsameDTO data_ = this.EsamUnMapper(data);
+            result = dao.AddEsame(data_);
+
+            return result;
+        }
+
+        public int DeleteEsameById(string esamidid)
+        {
+            int result = 0;
+
+
+
+            return result;
         }
         
         // Mappers
@@ -176,5 +207,28 @@ namespace BLL
 
             return res;
         }
+
+        public IDAL.DTO.EsameDTO EsamUnMapper(IBLL.DTO.EsameDTO data)
+        {
+            IDAL.DTO.EsameDTO esam = null;
+            try
+            {
+                Mapper.Initialize(cfg => cfg.CreateMap<IBLL.DTO.EsameDTO, IDAL.DTO.EsameDTO>());
+                Mapper.AssertConfigurationIsValid();
+                esam = Mapper.Map<IDAL.DTO.EsameDTO>(data);
+            }
+            catch (AutoMapperConfigurationException ex)
+            {
+                log.Error(string.Format("AutoMapper Configuration Error!\n{0}", ex.Message));
+            }
+            catch (AutoMapperMappingException ex)
+            {
+                log.Error(string.Format("AutoMapper Mapping Error!\n{0}", ex.Message));
+            }
+
+            return esam;
+        }
+    
+    
     }
 }
