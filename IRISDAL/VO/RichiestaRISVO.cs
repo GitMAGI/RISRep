@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IDAL.DTO
+namespace IDAL.VO
 {
-    public class RichiestaRISDTO
+    public class RichiestaRISVO
     {
         public string data { get; set; }
         public string data_creazione { get; set; }

@@ -39,12 +39,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTO\EpisodioDTO.cs" />
-    <Compile Include="DTO\EsameDTO.cs" />
-    <Compile Include="DTO\PazienteDTO.cs" />
-    <Compile Include="DTO\RichiestaRISDTO.cs" />
+    <Compile Include="VO\EpisodioVO.cs" />
+    <Compile Include="VO\EsameVO.cs" />
+    <Compile Include="VO\PazienteVO.cs" />
+    <Compile Include="VO\RichiestaRISVO.cs" />
     <Compile Include="IRISDAL.cs" />
-    <Compile Include="IRISDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -15,8 +15,7 @@ namespace RISDataRetriever
         static void Main(string[] args)
         {            
             DAL.RISDAL dal = new DAL.RISDAL();
-            DAL.RISDAO dao = new DAL.RISDAO();
-            BLL.RISBLL bll = new BLL.RISBLL(dal, dao);
+            BLL.RISBLL bll = new BLL.RISBLL(dal);
             DataRetriever DR = new DataRetriever(bll);
 
             /*
@@ -43,12 +42,12 @@ namespace RISDataRetriever
             int res = dao.SetEsameByPk(toW, "3");
             */
 
-            string esame_ext_key = "32443543543543";
-            string esamedataesecuzione = "01/05/2016 13:00:00";
-            string esamedataprenotazione = "01/03/2016 12:00:00";
-            string esamedesc = "Pompeleria Rizzoli";
-            string esamereferto = null;
-            string esamestato = "A";
+            string esame_ext_key = "8877943543543";
+            string esamedataesecuzione = "08/08/2016 18:00:00";
+            string esamedataprenotazione = "21/03/2016 19:00:00";
+            string esamedesc = "Pomi Adami";
+            string esamereferto = "http://iyuyiyuiyu";
+            string esamestato = "R";
             string esamerichid = "20160804111023719";
             int esametipo = 14852;
 

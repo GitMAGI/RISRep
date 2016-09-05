@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IDAL.DTO
+namespace IDAL.VO
 {
-    public class PazienteDTO
+    public class PazienteVO
     {
         public int archivio { get; set; }
         public string nominativo { get; set; }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IDAL.DTO
+namespace IDAL.VO
 {
-    public class EsameDTO
+    public class EsameVO
     {
         public long esameidid { get; set; }
         public string esamedesc { get; set; }

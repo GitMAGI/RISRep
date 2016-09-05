@@ -13,53 +13,51 @@ namespace BLL
             log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         private IDAL.IRISDAL dal;
-        private IDAL.IRISDAO dao;
 
-        public RISBLL(IDAL.IRISDAL IDAL, IDAL.IRISDAO IDAO)
+        public RISBLL(IDAL.IRISDAL IDAL)
         {
             this.dal = IDAL;
-            this.dao = IDAO;
         }
 
         public IBLL.DTO.PazienteDTO GetPazienteById(string id)
         {
-            IDAL.DTO.PazienteDTO dalRes = this.dal.GetPazienteById(id);
+            IDAL.VO.PazienteVO dalRes = this.dal.GetPazienteById(id);
             return this.PaziMapper(dalRes);
         }
 
         public IBLL.DTO.EpisodioDTO GetEpisodioById(string id)
         {
-            IDAL.DTO.EpisodioDTO dalRes = this.dal.GetEpisodioById(id);
+            IDAL.VO.EpisodioVO dalRes = this.dal.GetEpisodioById(id);
             return this.EpisMapper(dalRes);
         }
 
         public List<IBLL.DTO.RichiestaRISDTO> GetRichiesteRISByEpis(string episid)
         {
-            List<IDAL.DTO.RichiestaRISDTO> dalRes = this.dal.GetRichiesteByEpis(episid);
+            List<IDAL.VO.RichiestaRISVO> dalRes = this.dal.GetRichiesteByEpis(episid);
             return this.RichMapper(dalRes);
         }
 
         public IBLL.DTO.RichiestaRISDTO GetRichiestaRISById(string richidid)
         {
-            IDAL.DTO.RichiestaRISDTO dalRes = this.dal.GetRichiestaById(richidid);
+            IDAL.VO.RichiestaRISVO dalRes = this.dal.GetRichiestaById(richidid);
             return this.RichMapper(dalRes);
         }
 
         public List<IBLL.DTO.EsameDTO> GetEsamiByRich(string richidid)
         {
-            List<IDAL.DTO.EsameDTO> dalRes = this.dal.GetEsamiByRich(richidid);
+            List<IDAL.VO.EsameVO> dalRes = this.dal.GetEsamiByRich(richidid);
             return this.EsamMapper(dalRes);
         }
 
         public List<IBLL.DTO.EsameDTO> GetEsamiByEpis(string episidid)
         {
-            List<IDAL.DTO.EsameDTO> dalRes = this.dal.GetEsamiByEpis(episidid);
+            List<IDAL.VO.EsameVO> dalRes = this.dal.GetEsamiByEpis(episidid);
             return this.EsamMapper(dalRes);
         }
 
         public IBLL.DTO.EsameDTO GetEsameById(string esamidid)
         {
-            IDAL.DTO.EsameDTO dalRes = this.dal.GetEsameById(esamidid);
+            IDAL.VO.EsameVO dalRes = this.dal.GetEsameById(esamidid);
             return this.EsamMapper(dalRes);
         }
 
@@ -67,8 +65,8 @@ namespace BLL
         {
             int result = 0;
 
-            IDAL.DTO.EsameDTO data_ = this.EsamUnMapper(data);
-            result = dao.SetEsameByPk(data_, esamidid);
+            IDAL.VO.EsameVO data_ = this.EsamMapper(data);
+            result = dal.UpdateEsameByPk(data_, esamidid);
 
             return result;
         }
@@ -77,8 +75,8 @@ namespace BLL
         {
             int result = 0;
 
-            IDAL.DTO.EsameDTO data_ = this.EsamUnMapper(data);
-            result = dao.AddEsame(data_);
+            IDAL.VO.EsameVO data_ = this.EsamMapper(data);
+            result = dal.AddEsame(data_);
 
             return result;
         }
@@ -87,19 +85,19 @@ namespace BLL
         {
             int result = 0;
 
-            result = dao.DeleteEsame(esamidid);
+            result = dal.DeleteEsame(esamidid);
 
             return result;
         }
         
         // Mappers
         
-        public IBLL.DTO.PazienteDTO PaziMapper(IDAL.DTO.PazienteDTO raw)
+        public IBLL.DTO.PazienteDTO PaziMapper(IDAL.VO.PazienteVO raw)
         {
             IBLL.DTO.PazienteDTO pazi = null;
             try
             {
-                Mapper.Initialize(cfg => cfg.CreateMap<IDAL.DTO.PazienteDTO, IBLL.DTO.PazienteDTO>());
+                Mapper.Initialize(cfg => cfg.CreateMap<IDAL.VO.PazienteVO, IBLL.DTO.PazienteDTO>());
                 Mapper.AssertConfigurationIsValid();
                 pazi = Mapper.Map<IBLL.DTO.PazienteDTO>(raw);
             }
@@ -115,12 +113,12 @@ namespace BLL
             return pazi;
         }
 
-        public IBLL.DTO.EpisodioDTO EpisMapper(IDAL.DTO.EpisodioDTO raw)
+        public IBLL.DTO.EpisodioDTO EpisMapper(IDAL.VO.EpisodioVO raw)
         {            
             IBLL.DTO.EpisodioDTO epis = null;
             try
             {
-                Mapper.Initialize(cfg => cfg.CreateMap<IDAL.DTO.EpisodioDTO, IBLL.DTO.EpisodioDTO>());
+                Mapper.Initialize(cfg => cfg.CreateMap<IDAL.VO.EpisodioVO, IBLL.DTO.EpisodioDTO>());
                 Mapper.AssertConfigurationIsValid();
                 epis = Mapper.Map<IBLL.DTO.EpisodioDTO>(raw);
             }
@@ -136,12 +134,12 @@ namespace BLL
             return epis;
         }
 
-        public IBLL.DTO.RichiestaRISDTO RichMapper(IDAL.DTO.RichiestaRISDTO raw)
+        public IBLL.DTO.RichiestaRISDTO RichMapper(IDAL.VO.RichiestaRISVO raw)
         {
             IBLL.DTO.RichiestaRISDTO rich = null;
             try
             {
-                Mapper.Initialize(cfg => cfg.CreateMap<IDAL.DTO.RichiestaRISDTO, IBLL.DTO.RichiestaRISDTO>());
+                Mapper.Initialize(cfg => cfg.CreateMap<IDAL.VO.RichiestaRISVO, IBLL.DTO.RichiestaRISDTO>());
                 Mapper.AssertConfigurationIsValid();
                 rich = Mapper.Map<IBLL.DTO.RichiestaRISDTO>(raw);
             }
@@ -157,13 +155,13 @@ namespace BLL
             return rich;
         }
 
-        public List<IBLL.DTO.RichiestaRISDTO> RichMapper(List<IDAL.DTO.RichiestaRISDTO> raws)
+        public List<IBLL.DTO.RichiestaRISDTO> RichMapper(List<IDAL.VO.RichiestaRISVO> raws)
         {
             List<IBLL.DTO.RichiestaRISDTO> res = null;
 
             if(raws != null){
                 res = new List<IBLL.DTO.RichiestaRISDTO>();
-                foreach(IDAL.DTO.RichiestaRISDTO raw in raws){
+                foreach(IDAL.VO.RichiestaRISVO raw in raws){
                     res.Add(this.RichMapper(raw));
                 }
             }
@@ -171,12 +169,12 @@ namespace BLL
             return res;
         }
 
-        public IBLL.DTO.EsameDTO EsamMapper(IDAL.DTO.EsameDTO raw)
+        public IBLL.DTO.EsameDTO EsamMapper(IDAL.VO.EsameVO raw)
         {            
             IBLL.DTO.EsameDTO esam = null;
             try
             {
-                Mapper.Initialize(cfg => cfg.CreateMap<IDAL.DTO.EsameDTO, IBLL.DTO.EsameDTO>());
+                Mapper.Initialize(cfg => cfg.CreateMap<IDAL.VO.EsameVO, IBLL.DTO.EsameDTO>());
                 Mapper.AssertConfigurationIsValid();
                 esam = Mapper.Map<IBLL.DTO.EsameDTO>(raw);
             }
@@ -192,14 +190,14 @@ namespace BLL
             return esam;
         }
 
-        public List<IBLL.DTO.EsameDTO> EsamMapper(List<IDAL.DTO.EsameDTO> raws)
+        public List<IBLL.DTO.EsameDTO> EsamMapper(List<IDAL.VO.EsameVO> raws)
         {
             List<IBLL.DTO.EsameDTO> res = null;
 
             if (raws != null)
             {
                 res = new List<IBLL.DTO.EsameDTO>();
-                foreach (IDAL.DTO.EsameDTO raw in raws)
+                foreach (IDAL.VO.EsameVO raw in raws)
                 {
                     res.Add(this.EsamMapper(raw));
                 }
@@ -208,14 +206,14 @@ namespace BLL
             return res;
         }
 
-        public IDAL.DTO.EsameDTO EsamUnMapper(IBLL.DTO.EsameDTO data)
+        public IDAL.VO.EsameVO EsamMapper(IBLL.DTO.EsameDTO data)
         {
-            IDAL.DTO.EsameDTO esam = null;
+            IDAL.VO.EsameVO esam = null;
             try
             {
-                Mapper.Initialize(cfg => cfg.CreateMap<IBLL.DTO.EsameDTO, IDAL.DTO.EsameDTO>());
+                Mapper.Initialize(cfg => cfg.CreateMap<IBLL.DTO.EsameDTO, IDAL.VO.EsameVO>());
                 Mapper.AssertConfigurationIsValid();
-                esam = Mapper.Map<IDAL.DTO.EsameDTO>(data);
+                esam = Mapper.Map<IDAL.VO.EsameVO>(data);
             }
             catch (AutoMapperConfigurationException ex)
             {

@@ -59,10 +59,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DAO\DBO.csproj">
-      <Project>{ae2c09a2-e27a-4eb9-9afa-efc96ae9a999}</Project>
-      <Name>DBO</Name>
-    </ProjectReference>
     <ProjectReference Include="..\IRISBLL\IBLL.csproj">
       <Project>{79b473fe-d466-4c4b-9ac5-9bdd0aff15de}</Project>
       <Name>IBLL</Name>

@@ -8,12 +8,20 @@ namespace IDAL
 {
     public interface IRISDAL
     {
-        IDAL.DTO.PazienteDTO GetPazienteById(string pazidid);
-        IDAL.DTO.EpisodioDTO GetEpisodioById(string episidid);
-        IDAL.DTO.RichiestaRISDTO GetRichiestaById(string richidid);
-        List<IDAL.DTO.RichiestaRISDTO> GetRichiesteByEpis(string episidid);
-        List<IDAL.DTO.EsameDTO> GetEsamiByRich(string richidid);
-        List<IDAL.DTO.EsameDTO> GetEsamiByEpis(string episidid);
-        IDAL.DTO.EsameDTO GetEsameById(string esamidid);
+        IDAL.VO.PazienteVO GetPazienteById(string pazidid);
+        IDAL.VO.EpisodioVO GetEpisodioById(string episidid);
+
+        IDAL.VO.RichiestaRISVO GetRichiestaById(string richidid);
+        List<IDAL.VO.RichiestaRISVO> GetRichiesteByEpis(string episidid);
+
+        List<IDAL.VO.EsameVO> GetEsamiByRich(string richidid);
+        List<IDAL.VO.EsameVO> GetEsamiByEpis(string episidid);
+        IDAL.VO.EsameVO GetEsameById(string esamidid);
+        int UpdateEsameByPk(Dictionary<string, object> data, string esamidid);
+        int UpdateEsameByPk(IDAL.VO.EsameVO data, string esamidid);
+        int AddEsame(Dictionary<string, object> data);
+        int AddEsame(IDAL.VO.EsameVO data);
+        int DeleteEsame(string esamidid);
+        int DeleteEsame(IDAL.VO.EsameVO data);
     }
 }
