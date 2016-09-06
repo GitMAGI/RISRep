@@ -18,7 +18,7 @@ namespace RISDataRetriever
             BLL.RISBLL bll = new BLL.RISBLL(dal);
             DataRetriever DR = new DataRetriever(bll);
 
-            /*
+            
             IBLL.DTO.EpisodioDTO ep = (IBLL.DTO.EpisodioDTO)DR.GetEpisData("1828");
             IBLL.DTO.PazienteDTO p = (IBLL.DTO.PazienteDTO)DR.GetPaziData((ep.codice).ToString());
             List<IBLL.DTO.RichiestaRISDTO> es = (List<IBLL.DTO.RichiestaRISDTO>)DR.GetRichsDataByEpis("490937");
@@ -34,13 +34,13 @@ namespace RISDataRetriever
             exam["esameidid"] = 3;
             exam["esamestato"] = "A";
             exam["esame_ext_key"] = "7988282";
-            int res = dal.SetEsameByPk(exam, examId);
+            int res = dal.UpdateEsameByPk(exam, examId);
             
-            IDAL.DTO.EsameDTO toW = dal.GetEsameById("3");
+            IDAL.VO.EsameVO toW = dal.GetEsameById("3");
             toW.esamestato = "A";
             toW.esame_ext_key = "2919021";
-            int res = dao.SetEsameByPk(toW, "3");
-            */
+            res = dal.UpdateEsameByPk(toW, "3");
+            
 
             string esame_ext_key = "8877943543543";
             string esamedataesecuzione = "08/08/2016 18:00:00";

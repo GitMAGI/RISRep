@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using GeneralLib;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,9 @@ namespace DAL
     {
         public IDAL.VO.RichiestaRISVO GetRichiestaById(string richidid)
         {
+            Stopwatch tw = new Stopwatch();
+            tw.Start();
+
             IDAL.VO.RichiestaRISVO rich = null;
             try
             {
@@ -22,14 +27,24 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                log.Warn(string.Format("EntityFramework returned an Exception! \n{0}", ex.Message));
                 log.Info(string.Format("Query Executed! Retrieved 0 record!"));
+                string msg = "An Error occured! Exception detected!";
+                log.Info(msg);
+                log.Error(msg + "\n" + ex.Message);
             }
+
+            tw.Stop();
+
+            log.Info(string.Format("Completed! Elapsed time {0}", LibString.TimeSpanToTimeHmsms(tw.Elapsed)));
+
             return rich;
         }
         public List<IDAL.VO.RichiestaRISVO> GetRichiesteByEpis(string episidid)
         {
-            List<IDAL.VO.RichiestaRISVO> rich = null;
+            Stopwatch tw = new Stopwatch();
+            tw.Start();
+
+            List<IDAL.VO.RichiestaRISVO> richs = null;
             try
             {
                 /*           
@@ -47,7 +62,7 @@ namespace DAL
 
                 }                 
                 */
-                rich = new List<IDAL.VO.RichiestaRISVO>();
+                richs = new List<IDAL.VO.RichiestaRISVO>();
 
                 List<hlt_ricradiologica> richs_ = hltCC.hlt_ricradiologica.Where(t => t.idepisodio == episidid).ToList();
 
@@ -55,21 +70,29 @@ namespace DAL
 
                 foreach (hlt_ricradiologica rich_ in richs_)
                 {
-                    rich.Add(this.RichMapper(rich_));
+                    richs.Add(this.RichMapper(rich_));
                 }
-
-                log.Info(string.Format("Record mapped to {0}", rich.GetType().ToString()));
+                log.Info(string.Format("{0} Records mapped to {1}", richs.Count, richs.First().GetType().ToString()));  
             }
             catch (Exception ex)
             {
-                log.Warn(string.Format("EntityFramework returned an Exception! \n{0}", ex.Message));
                 log.Info(string.Format("Query Executed! Retrieved 0 record!"));
+                string msg = "An Error occured! Exception detected!";
+                log.Info(msg);
+                log.Error(msg + "\n" + ex.Message);
             }
 
-            return rich;
+            tw.Stop();
+
+            log.Info(string.Format("Completed! Elapsed time {0}", LibString.TimeSpanToTimeHmsms(tw.Elapsed)));
+
+            return richs;
         }
         public int UpdateRichiestaByPk(IDAL.VO.RichiestaRISVO data, string richidid)
         {
+            Stopwatch tw = new Stopwatch();
+            tw.Start();
+
             int result = 0;
             try
             {                
@@ -87,12 +110,19 @@ namespace DAL
                 }
 
                 result = hltCC.SaveChanges();
+                log.Info(string.Format("Query Executed! Updated {0} record!", result));
             }
             catch (Exception ex)
             {
-                log.Warn(string.Format("Exception Occurred! \n{0}", ex.Message));
                 log.Info(string.Format("Query Executed! Updated 0 record!"));
+                string msg = "An Error occured! Exception detected!";
+                log.Info(msg);
+                log.Error(msg + "\n" + ex.Message);
             }
+
+            tw.Stop();
+
+            log.Info(string.Format("Completed! Elapsed time {0}", LibString.TimeSpanToTimeHmsms(tw.Elapsed)));
 
             return result;
         }
@@ -178,6 +208,8 @@ namespace DAL
 
             return rich;
         }
-    
+
+
+        public List<IDAL.VO.RichiestaRISVO> richs { get; set; }
     }
 }

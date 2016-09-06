@@ -56,8 +56,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAO\EpisodioDAO.cs" />
     <Compile Include="DAO\EsameDAO.cs" />
-    <Compile Include="DAO\RichiestaDAO.cs" />
+    <Compile Include="DAO\RichiestaRISDAO.cs" />
     <Compile Include="DAO\PazienteDAO.cs" />
     <Compile Include="DBSQL.cs" />
     <Compile Include="hlt_esameradio.cs">
@@ -293,6 +294,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GeneralLib\GeneralLib.csproj">
+      <Project>{c5017d0d-39f6-4223-af5a-fefe51d21370}</Project>
+      <Name>GeneralLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IRISDAL\IDAL.csproj">
       <Project>{b954af4b-a52a-4159-8be8-899f65e2dec1}</Project>
       <Name>IDAL</Name>

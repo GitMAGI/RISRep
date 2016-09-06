@@ -1,6 +1,8 @@
-﻿using System;
+﻿using GeneralLib;
+using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,59 +13,49 @@ namespace DAL
     {
         public IDAL.VO.PazienteVO GetPazienteById(string pazidid)
         {
-            string connectionString = this.HLTDesktopConnectionString;
+            Stopwatch tw = new Stopwatch();
+            tw.Start();
+
             IDAL.VO.PazienteVO pazi = null;
 
-            string query = "SELECT * FROM AnagraficaPazienti WHERE seriale = @seriale";
-            Dictionary<string, object> pars = new Dictionary<string, object>();
-            pars["seriale"] = pazidid;
-
-            log.Info(string.Format("Query: {0}", query));
-            log.Info(string.Format("Params: {0}", string.Join(";", pars.Select(x => x.Key + "=" + x.Value).ToArray())));
-
-            DataTable data = DAL.DBSQL.ExecuteQueryWithParams(connectionString, query, pars);
-
-
-            log.Info(string.Format("Query Executed! Retrieved {0} records!", data.Rows.Count));
-
-            if (data != null && data.Rows.Count == 1)
+            try
             {
-                DataRow row = data.Rows[0];
+                string connectionString = this.HLTDesktopConnectionString;
 
-                pazi = PaziMapper(row);
+                string query = "SELECT * FROM AnagraficaPazienti WHERE seriale = @seriale";
+                Dictionary<string, object> pars = new Dictionary<string, object>();
+                pars["seriale"] = pazidid;
 
-                log.Info("Record mapped to PazienteDTO");
+                log.Info(string.Format("Query: {0}", query));
+                log.Info(string.Format("Params: {0}", string.Join(";", pars.Select(x => x.Key + "=" + x.Value).ToArray())));
+
+                DataTable data = DAL.DBSQL.ExecuteQueryWithParams(connectionString, query, pars);
+
+                log.Info(string.Format("Query Executed! Retrieved {0} records!", data.Rows.Count));
+
+                if (data != null && data.Rows.Count == 1)
+                {
+                    DataRow row = data.Rows[0];
+
+                    pazi = PaziMapper(row);
+
+                    log.Info(string.Format("Record mapped to {0}", pazi.GetType().ToString()));
+                }
             }
+            catch (Exception ex)
+            {
+                string msg = "An Error occured! Exception detected!";
+                log.Info(msg);
+                log.Error(msg + "\n" + ex.Message);
+            }
+
+            tw.Stop();
+
+            log.Info(string.Format("Completed! Elapsed time {0}", LibString.TimeSpanToTimeHmsms(tw.Elapsed)));
 
             return pazi;
         }
-        public IDAL.VO.EpisodioVO GetEpisodioById(string episidid)
-        {
-            string connectionString = this.HLTDesktopConnectionString;
-            IDAL.VO.EpisodioVO epis = null;
-
-            string query = "SELECT * FROM Episodi WHERE seriale = @seriale";
-            Dictionary<string, object> pars = new Dictionary<string, object>();
-            pars["seriale"] = episidid;
-
-            log.Info(string.Format("Query: {0}", query));
-            log.Info(string.Format("Params: {0}", string.Join(";", pars.Select(x => x.Key + "=" + x.Value).ToArray())));
-
-            DataTable data = DAL.DBSQL.ExecuteQueryWithParams(connectionString, query, pars);
-
-            log.Info(string.Format("Query Executed! Retrieved {0} records!", data.Rows.Count));
-
-            if (data != null && data.Rows.Count == 1)
-            {
-                DataRow row = data.Rows[0];
-
-                epis = EpisMapper(row);
-
-                log.Info("Record mapped to EpisodioDTO");
-            }
-            return epis;
-        }
-
+        
         public IDAL.VO.PazienteVO PaziMapper(DataRow row)
         {
             IDAL.VO.PazienteVO pazi = new IDAL.VO.PazienteVO();

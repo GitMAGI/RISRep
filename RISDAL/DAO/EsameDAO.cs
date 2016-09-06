@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using GeneralLib;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,23 +14,36 @@ namespace DAL
     {
         public List<IDAL.VO.EsameVO> GetEsamiByRich(string richidid)
         {
+            Stopwatch tw = new Stopwatch();
+            tw.Start();
+
             List<IDAL.VO.EsameVO> esams = null;
             try
             {
                 List<hlt_esameradio> esams_ = hltCC.hlt_esameradio.Where(t => t.esamerichid == richidid).ToList();
                 log.Info(string.Format("Query Executed! Retrieved {0} record!", esams_.Count));
                 esams = this.EsamMapper(esams_);
-                log.Info(string.Format("{0} Records mapped to {1}", esams.Count, esams.GetType().ToString()));
+                log.Info(string.Format("{0} Records mapped to {1}", esams.Count, esams.First().GetType().ToString()));
             }
             catch (Exception ex)
-            {
-                log.Warn(string.Format("EntityFramework returned an Exception! \n{0}", ex.Message));
+            {                
                 log.Info(string.Format("Query Executed! Retrieved 0 record!"));
+                string msg = "An Error occured! Exception detected!";
+                log.Info(msg);
+                log.Error(msg + "\n" + ex.Message);
             }
+
+            tw.Stop();
+
+            log.Info(string.Format("Completed! Elapsed time {0}", LibString.TimeSpanToTimeHmsms(tw.Elapsed)));
+
             return esams;
         }
         public List<IDAL.VO.EsameVO> GetEsamiByEpis(string episidid)
         {
+            Stopwatch tw = new Stopwatch();
+            tw.Start();
+
             List<IDAL.VO.EsameVO> esams = null;
             try
             {
@@ -37,18 +52,28 @@ namespace DAL
                 List<hlt_esameradio> esams_ = L2EQuery.ToList();
                 log.Info(string.Format("Query Executed! Retrieved {0} record!", esams_.Count));
                 esams = this.EsamMapper(esams_);
-                log.Info(string.Format("{0} Records mapped to EsameDTO", esams.Count));
+                log.Info(string.Format("{0} Records mapped to {1}", esams.Count, esams.First().GetType().ToString()));   
 
             }
             catch (Exception ex)
             {
-                log.Warn(string.Format("EntityFramework returned an Exception! \n{0}", ex.Message));
                 log.Info(string.Format("Query Executed! Retrieved 0 record!"));
+                string msg = "An Error occured! Exception detected!";
+                log.Info(msg);
+                log.Error(msg + "\n" + ex.Message);
             }
+
+            tw.Stop();
+
+            log.Info(string.Format("Completed! Elapsed time {0}", LibString.TimeSpanToTimeHmsms(tw.Elapsed)));
+
             return esams;
         }
         public IDAL.VO.EsameVO GetEsameById(string esamidid)
         {
+            Stopwatch tw = new Stopwatch();
+            tw.Start();
+
             IDAL.VO.EsameVO esam = null;
             try
             {
@@ -56,17 +81,27 @@ namespace DAL
                 hlt_esameradio esam_ = hltCC.hlt_esameradio.Single(t => t.esameidid == esamidid_);
                 log.Info(string.Format("Query Executed! Retrieved 1 record!"));
                 esam = this.EsamMapper(esam_);
-                log.Info("Record mapped to EsameDTO");
+                log.Info(string.Format("Record mapped to {0}", esam.GetType().ToString()));                
             }
             catch (Exception ex)
             {
-                log.Warn(string.Format("EntityFramework returned an Exception! \n{0}", ex.Message));
                 log.Info(string.Format("Query Executed! Retrieved 0 record!"));
+                string msg = "An Error occured! Exception detected!";
+                log.Info(msg);
+                log.Error(msg + "\n" + ex.Message);
             }
+
+            tw.Stop();
+
+            log.Info(string.Format("Completed! Elapsed time {0}", LibString.TimeSpanToTimeHmsms(tw.Elapsed)));
+
             return esam;
         }
         public int UpdateEsameByPk(Dictionary<string, object> data, string esamidid)
         {
+            Stopwatch tw = new Stopwatch();
+            tw.Start();
+
             int result = 0;
             try
             {
@@ -88,17 +123,27 @@ namespace DAL
                 }
 
                 result = hltCC.SaveChanges();
+                log.Info(string.Format("Query Executed! Updated {0} record!", result));
             }
             catch (Exception ex)
             {
-                log.Warn(string.Format("Exception Occurred! \n{0}", ex.Message));
                 log.Info(string.Format("Query Executed! Updated 0 record!"));
+                string msg = "An Error occured! Exception detected!";
+                log.Info(msg);
+                log.Error(msg + "\n" + ex.Message);
             }
+
+            tw.Stop();
+
+            log.Info(string.Format("Completed! Elapsed time {0}", LibString.TimeSpanToTimeHmsms(tw.Elapsed)));
 
             return result;
         }
         public int UpdateEsameByPk(IDAL.VO.EsameVO data, string esamidid)
         {
+            Stopwatch tw = new Stopwatch();
+            tw.Start();
+
             int result = 0;
             try
             {
@@ -117,16 +162,27 @@ namespace DAL
                 }
 
                 result = hltCC.SaveChanges();
+                log.Info(string.Format("Query Executed! Updated {0} record!", result));
             }
             catch (Exception ex)
             {
-                log.Warn(string.Format("Exception Occurred! \n{0}", ex.Message));
                 log.Info(string.Format("Query Executed! Updated 0 record!"));
+                string msg = "An Error occured! Exception detected!";
+                log.Info(msg);
+                log.Error(msg + "\n" + ex.Message);
             }
+
+            tw.Stop();
+
+            log.Info(string.Format("Completed! Elapsed time {0}", LibString.TimeSpanToTimeHmsms(tw.Elapsed)));
+
             return result;
         }
         public int AddEsame(Dictionary<string, object> data)
         {
+            Stopwatch tw = new Stopwatch();
+            tw.Start();
+
             int result = 0;
             try
             {
@@ -148,32 +204,54 @@ namespace DAL
 
                 hltCC.hlt_esameradio.Add(esam);
                 result = hltCC.SaveChanges();
+                log.Info(string.Format("Query Executed! Added {0} record!", result));
             }
             catch (Exception ex)
             {
-                log.Warn(string.Format("Exception Occurred! \n{0}", ex.Message));
-                log.Info(string.Format("Query Executed! Updated 0 record!"));
+                log.Info(string.Format("Query Executed! Added 0 record!"));
+                string msg = "An Error occured! Exception detected!";
+                log.Info(msg);
+                log.Error(msg + "\n" + ex.Message);
             }
+
+            tw.Stop();
+
+            log.Info(string.Format("Completed! Elapsed time {0}", LibString.TimeSpanToTimeHmsms(tw.Elapsed)));
+
             return result;
         }
         public int AddEsame(IDAL.VO.EsameVO data)
         {
+            Stopwatch tw = new Stopwatch();
+            tw.Start();
+
             int result = 0;
             try
             {
                 hlt_esameradio data_ = this.EsamMapper(data);
                 hltCC.hlt_esameradio.Add(data_);
                 result = hltCC.SaveChanges();
+                log.Info(string.Format("Query Executed! Added {0} record!", result));
             }
             catch (Exception ex)
             {
-                log.Warn(string.Format("Exception Occurred! \n{0}", ex.Message));
-                log.Info(string.Format("Query Executed! Updated 0 record!"));
+                log.Info(string.Format("Query Executed! Added 0 record!"));
+                string msg = "An Error occured! Exception detected!";
+                log.Info(msg);
+                log.Error(msg + "\n" + ex.Message);
             }
+
+            tw.Stop();
+
+            log.Info(string.Format("Completed! Elapsed time {0}", LibString.TimeSpanToTimeHmsms(tw.Elapsed)));
+
             return result;
         }
         public int DeleteEsame(string esamidid)
         {
+            Stopwatch tw = new Stopwatch();
+            tw.Start();
+
             int result = 0;
             try
             {
@@ -181,17 +259,27 @@ namespace DAL
                 hlt_esameradio data_ = hltCC.hlt_esameradio.Where(s => s.esameidid == esamidid_).FirstOrDefault<hlt_esameradio>();
                 hltCC.Entry(data_).State = System.Data.EntityState.Deleted;
                 result = hltCC.SaveChanges();
+                log.Info(string.Format("Query Executed! Deleted {0} record!", result));
             }
             catch (Exception ex)
             {
-                log.Warn(string.Format("Exception Occurred! \n{0}", ex.Message));
                 log.Info(string.Format("Query Executed! Deleted 0 record!"));
+                string msg = "An Error occured! Exception detected!";
+                log.Info(msg);
+                log.Error(msg + "\n" + ex.Message);
             }
+
+            tw.Stop();
+
+            log.Info(string.Format("Completed! Elapsed time {0}", LibString.TimeSpanToTimeHmsms(tw.Elapsed)));
 
             return result;
         }
         public int DeleteEsame(IDAL.VO.EsameVO data)
         {
+            Stopwatch tw = new Stopwatch();
+            tw.Start();
+
             int result = 0;
 
             try
@@ -199,12 +287,19 @@ namespace DAL
                 hlt_esameradio data_ = this.EsamMapper(data);
                 hltCC.Entry(data_).State = System.Data.EntityState.Deleted;
                 result = hltCC.SaveChanges();
+                log.Info(string.Format("Query Executed! Deleted {0} record!", result));
             }
             catch (Exception ex)
             {
-                log.Warn(string.Format("Exception Occurred! \n{0}", ex.Message));
                 log.Info(string.Format("Query Executed! Deleted 0 record!"));
+                string msg = "An Error occured! Exception detected!";
+                log.Info(msg);
+                log.Error(msg + "\n" + ex.Message);
             }
+
+            tw.Stop();
+
+            log.Info(string.Format("Completed! Elapsed time {0}", LibString.TimeSpanToTimeHmsms(tw.Elapsed)));
 
             return result;
         }
