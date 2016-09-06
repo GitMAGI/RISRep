@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DAL.Mappers;
 
 namespace DAL
 {
@@ -36,7 +37,7 @@ namespace DAL
                 {
                     DataRow row = data.Rows[0];
 
-                    epis = EpisMapper(row);
+                    epis = EpisodioMapper.EpisMapper(row);
                                         
                     log.Info(string.Format("Record mapped to {0}", epis.GetType().ToString()));
                 }
@@ -54,6 +55,5 @@ namespace DAL
 
             return epis;
         }
-
     }
 }

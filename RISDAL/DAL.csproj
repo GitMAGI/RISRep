@@ -64,6 +64,10 @@
     <Compile Include="hlt_esameradio.cs">
       <DependentUpon>ModelRIS.tt</DependentUpon>
     </Compile>
+    <Compile Include="Mappers\EpisodioMapper.cs" />
+    <Compile Include="Mappers\EsameMapper.cs" />
+    <Compile Include="Mappers\PazienteMapper.cs" />
+    <Compile Include="Mappers\RichiestaRISMapper.cs" />
     <Compile Include="RISDAL.cs" />
     <Compile Include="fnSplitString_Result.cs">
       <DependentUpon>ModelRIS.tt</DependentUpon>

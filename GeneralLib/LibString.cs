@@ -46,22 +46,53 @@ namespace GeneralLib
             string result = "";
             if (cmd.CommandType == System.Data.CommandType.StoredProcedure)
             {
-                result = "exec " + cmd.CommandText + " ";
+                result = SQLCommandSP2String(cmd);
             }
             else
             {
-                result = cmd.CommandText + " ";
-            }
-           
+                result = SQLCommandQuery2String(cmd);                
+            }            
+            
+            return result;
+        }
+
+        static private string SQLCommandQuery2String(SqlCommand cmd)
+        {
+            string result = "";
+
+            result = cmd.CommandText;
             int _l = 1;
             foreach (SqlParameter p in cmd.Parameters)
             {
-                string pv = IsNumericType(p.Value) == true ? p.ParameterName + " = " + p.Value.ToString() : p.ParameterName + " = '" + p.Value.ToString() + "'";
+                string val_ = IsNumericType(p.DbType) == true ? p.Value.ToString() : "'" + p.Value.ToString() + "'";
+                string par_ = "@" + p.ParameterName;
+
+                result = result.Replace(par_, val_);
+
+                if (_l < cmd.Parameters.Count)
+                    result += ", ";
+                _l++;
+            }
+
+            return result;
+        }
+
+        static private string SQLCommandSP2String(SqlCommand cmd)
+        {
+            string result = "";
+
+            result = "exec " + cmd.CommandText + " ";
+            int _l = 1;
+            foreach (SqlParameter p in cmd.Parameters)
+            {
+                //string pv = IsNumericType(p.Value) == true ? p.ParameterName + " = " + p.Value.ToString() : p.ParameterName + " = '" + p.Value.ToString() + "'";
+                string pv = IsNumericType(p.DbType) == true ? p.ParameterName + " = " + p.Value.ToString() : p.ParameterName + " = '" + p.Value.ToString() + "'";
                 result += pv;
                 if (_l < cmd.Parameters.Count)
                     result += ", ";
                 _l++;
             }
+
             return result;
         }
     }

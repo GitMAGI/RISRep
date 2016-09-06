@@ -64,8 +64,6 @@ namespace RISDataRetriever
 
             int result = bll.AddEsame(esam);
 
-            System.Console.WriteLine("Operazione Completata. Risultato operazione scrittura: {0}", result);
-
 
             System.Console.WriteLine("Premere un tasto per continuare ...");
             System.Console.ReadKey();        

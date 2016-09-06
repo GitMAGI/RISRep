@@ -28,8 +28,8 @@ namespace DAL
             using (SqlCommand cmd = new SqlCommand(sql, connection))
             {
                 log.Info(string.Format("Opening Connection on '{0}' ...", connectionString));
-                connection.Open();
-                log.Info(string.Format("Query: {0}", LibString.SQLCommand2String(cmd)));
+                connection.Open();                
+                log.Info(string.Format("Query: {0}", sql));
                 log.Info(string.Format("Query execution starting ..."));
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -98,7 +98,7 @@ namespace DAL
             {
                 log.Info(string.Format("Opening Connection on '{0}' ...", connectionString));
                 connection.Open();
-                log.Info(string.Format("Query: {0}", LibString.SQLCommand2String(cmd)));
+                log.Info(string.Format("Query: {0}", sql));
                 log.Info(string.Format("Query execution starting ..."));
                 result = cmd.ExecuteNonQuery();
                 log.Info(string.Format("Query executed! Result count: {0}", result));
