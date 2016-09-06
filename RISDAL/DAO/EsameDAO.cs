@@ -21,13 +21,13 @@ namespace DAL
             try
             {
                 List<hlt_esameradio> esams_ = hltCC.hlt_esameradio.Where(t => t.esamerichid == richidid).ToList();
-                log.Info(string.Format("Query Executed! Retrieved {0} record!", esams_.Count));
+                log.Info(string.Format("Entity Framework Query Executed! Retrieved {0} record!", esams_.Count));
                 esams = EsameMapper.EsamMapper(esams_);
                 log.Info(string.Format("{0} Records mapped to {1}", esams.Count, esams.First().GetType().ToString()));
             }
             catch (Exception ex)
-            {                
-                log.Info(string.Format("Query Executed! Retrieved 0 record!"));
+            {
+                log.Info(string.Format("Entity Framework Query Executed! Retrieved 0 record!"));
                 string msg = "An Error occured! Exception detected!";
                 log.Info(msg);
                 log.Error(msg + "\n" + ex.Message);
@@ -50,14 +50,14 @@ namespace DAL
                 var L2EQuery = from e in hltCC.hlt_esameradio join r in hltCC.hlt_ricradiologica on e.esamerichid equals r.objectid where r.idepisodio.Equals(episidid) select e;
 
                 List<hlt_esameradio> esams_ = L2EQuery.ToList();
-                log.Info(string.Format("Query Executed! Retrieved {0} record!", esams_.Count));
+                log.Info(string.Format("Entity Framework Query Executed! Retrieved {0} record!", esams_.Count));
                 esams = EsameMapper.EsamMapper(esams_);
                 log.Info(string.Format("{0} Records mapped to {1}", esams.Count, esams.First().GetType().ToString()));   
 
             }
             catch (Exception ex)
             {
-                log.Info(string.Format("Query Executed! Retrieved 0 record!"));
+                log.Info(string.Format("Entity Framework Query Executed! Retrieved 0 record!"));
                 string msg = "An Error occured! Exception detected!";
                 log.Info(msg);
                 log.Error(msg + "\n" + ex.Message);
@@ -79,13 +79,13 @@ namespace DAL
             {
                 long esamidid_ = long.Parse(esamidid);
                 hlt_esameradio esam_ = hltCC.hlt_esameradio.Single(t => t.esameidid == esamidid_);
-                log.Info(string.Format("Query Executed! Retrieved 1 record!"));
+                log.Info(string.Format("Entity Framework Query Executed! Retrieved 1 record!"));
                 esam = EsameMapper.EsamMapper(esam_);
                 log.Info(string.Format("Record mapped to {0}", esam.GetType().ToString()));                
             }
             catch (Exception ex)
             {
-                log.Info(string.Format("Query Executed! Retrieved 0 record!"));
+                log.Info(string.Format("Entity Framework Query Executed! Retrieved 0 record!"));
                 string msg = "An Error occured! Exception detected!";
                 log.Info(msg);
                 log.Error(msg + "\n" + ex.Message);
@@ -123,11 +123,11 @@ namespace DAL
                 }
 
                 result = hltCC.SaveChanges();
-                log.Info(string.Format("Query Executed! Updated {0} record!", result));
+                log.Info(string.Format("Entity Framework Query Executed! Updated {0} record!", result));
             }
             catch (Exception ex)
             {
-                log.Info(string.Format("Query Executed! Updated 0 record!"));
+                log.Info(string.Format("Entity Framework Query Executed! Updated 0 record!"));
                 string msg = "An Error occured! Exception detected!";
                 log.Info(msg);
                 log.Error(msg + "\n" + ex.Message);
@@ -162,11 +162,11 @@ namespace DAL
                 }
 
                 result = hltCC.SaveChanges();
-                log.Info(string.Format("Query Executed! Updated {0} record!", result));
+                log.Info(string.Format("Entity Framework Query Executed! Updated {0} record!", result));
             }
             catch (Exception ex)
             {
-                log.Info(string.Format("Query Executed! Updated 0 record!"));
+                log.Info(string.Format("Entity Framework Query Executed! Updated 0 record!"));
                 string msg = "An Error occured! Exception detected!";
                 log.Info(msg);
                 log.Error(msg + "\n" + ex.Message);
@@ -204,11 +204,11 @@ namespace DAL
 
                 hltCC.hlt_esameradio.Add(esam);
                 result = hltCC.SaveChanges();
-                log.Info(string.Format("Query Executed! Added {0} record!", result));
+                log.Info(string.Format("Entity Framework Query Executed! Added {0} record!", result));
             }
             catch (Exception ex)
             {
-                log.Info(string.Format("Query Executed! Added 0 record!"));
+                log.Info(string.Format("Entity Framework Query Executed! Added 0 record!"));
                 string msg = "An Error occured! Exception detected!";
                 log.Info(msg);
                 log.Error(msg + "\n" + ex.Message);
@@ -231,11 +231,11 @@ namespace DAL
                 hlt_esameradio data_ = EsameMapper.EsamMapper(data);
                 hltCC.hlt_esameradio.Add(data_);
                 result = hltCC.SaveChanges();
-                log.Info(string.Format("Query Executed! Added {0} record!", result));
+                log.Info(string.Format("Entity Framework Query Executed! Added {0} record!", result));
             }
             catch (Exception ex)
             {
-                log.Info(string.Format("Query Executed! Added 0 record!"));
+                log.Info(string.Format("Entity Framework Query Executed! Added 0 record!"));
                 string msg = "An Error occured! Exception detected!";
                 log.Info(msg);
                 log.Error(msg + "\n" + ex.Message);
@@ -259,11 +259,11 @@ namespace DAL
                 hlt_esameradio data_ = hltCC.hlt_esameradio.Where(s => s.esameidid == esamidid_).FirstOrDefault<hlt_esameradio>();
                 hltCC.Entry(data_).State = System.Data.EntityState.Deleted;
                 result = hltCC.SaveChanges();
-                log.Info(string.Format("Query Executed! Deleted {0} record!", result));
+                log.Info(string.Format("Entity Framework Query Executed! Deleted {0} record!", result));
             }
             catch (Exception ex)
             {
-                log.Info(string.Format("Query Executed! Deleted 0 record!"));
+                log.Info(string.Format("Entity Framework Query Executed! Deleted 0 record!"));
                 string msg = "An Error occured! Exception detected!";
                 log.Info(msg);
                 log.Error(msg + "\n" + ex.Message);
@@ -287,11 +287,11 @@ namespace DAL
                 hlt_esameradio data_ = EsameMapper.EsamMapper(data);
                 hltCC.Entry(data_).State = System.Data.EntityState.Deleted;
                 result = hltCC.SaveChanges();
-                log.Info(string.Format("Query Executed! Deleted {0} record!", result));
+                log.Info(string.Format("Entity Framework Query Executed! Deleted {0} record!", result));
             }
             catch (Exception ex)
             {
-                log.Info(string.Format("Query Executed! Deleted 0 record!"));
+                log.Info(string.Format("Entity Framework Query Executed! Deleted 0 record!"));
                 string msg = "An Error occured! Exception detected!";
                 log.Info(msg);
                 log.Error(msg + "\n" + ex.Message);

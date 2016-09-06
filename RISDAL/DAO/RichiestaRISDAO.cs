@@ -22,13 +22,13 @@ namespace DAL
             try
             {
                 hlt_ricradiologica rich_ = hltCC.hlt_ricradiologica.Single(t => t.objectid == richidid);
-                log.Info(string.Format("Query Executed! Retrieved 1 record!"));
+                log.Info(string.Format("Entity Framework Query Executed! Retrieved 1 record!"));
                 rich = RichiestaRISMapper.RichMapper(rich_);
                 log.Info(string.Format("Record mapped to {0}", rich.GetType().ToString()));
             }
             catch (Exception ex)
             {
-                log.Info(string.Format("Query Executed! Retrieved 0 record!"));
+                log.Info(string.Format("Entity Framework Query Executed! Retrieved 0 record!"));
                 string msg = "An Error occured! Exception detected!";
                 log.Info(msg);
                 log.Error(msg + "\n" + ex.Message);
@@ -67,7 +67,7 @@ namespace DAL
 
                 List<hlt_ricradiologica> richs_ = hltCC.hlt_ricradiologica.Where(t => t.idepisodio == episidid).ToList();
 
-                log.Info(string.Format("Query Executed! Retrieved {0} record!", richs_.Count));
+                log.Info(string.Format("Entity Framework Query Executed! Retrieved {0} record!", richs_.Count));
 
                 foreach (hlt_ricradiologica rich_ in richs_)
                 {
@@ -77,7 +77,7 @@ namespace DAL
             }
             catch (Exception ex)
             {
-                log.Info(string.Format("Query Executed! Retrieved 0 record!"));
+                log.Info(string.Format("Entity Framework Query Executed! Retrieved 0 record!"));
                 string msg = "An Error occured! Exception detected!";
                 log.Info(msg);
                 log.Error(msg + "\n" + ex.Message);
